@@ -143,11 +143,17 @@ void wait_lid_status(bool open) {
 
 void try_boot_cd() {
 	int32_t read;
-
+	
+	/*
 	debug_write("Swap CD now");
 	wait_lid_status(true);
 	wait_lid_status(false);
-
+	*/
+	
+	debug_write("Waiting for lid close");
+	wait_lid_status(false);
+	
+	// i expect to change code in here to make it easier to retry a disc if the first inits fail, maybe i hit eject by accident or my disc is scratched
 	debug_write("Initializing CD");
 	if (!CdInit()) {
 		debug_write("Init failed");
